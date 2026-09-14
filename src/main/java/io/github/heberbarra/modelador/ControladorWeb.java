@@ -255,6 +255,11 @@ public class ControladorWeb {
 
     @RequestMapping({"/criarSessao", "/criarSessao.html"})
     public String criarSessao(ModelMap modelMap) {
+
+        if (!DataSourceBuilder.isProfessor()) {
+            return "redirect:/entrarSessao";
+        }
+
         InjetorAtributos.injetarTituloPagina(modelMap, "session-create");
         InjetorAtributos.injetarPaleta(modelMap);
 
@@ -263,6 +268,11 @@ public class ControladorWeb {
 
     @RequestMapping({"/entrarSessao", "/entrarSessao.html"})
     public String entrarSessao(ModelMap modelMap) {
+
+        if (DataSourceBuilder.isProfessor()) {
+            return "redirect:/criarSessao";
+        }
+
         InjetorAtributos.injetarTituloPagina(modelMap, "session-enter");
         InjetorAtributos.injetarPaleta(modelMap);
 
