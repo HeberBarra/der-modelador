@@ -15,6 +15,8 @@ package io.github.heberbarra.modelador.infrastructure.controller;
 
 import io.github.heberbarra.modelador.domain.model.AtividadeDTO;
 import io.github.heberbarra.modelador.infrastructure.services.AtividadeServices;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
@@ -29,9 +31,9 @@ public class ControladorAtividades {
     }
 
     @PostMapping({"criarAtividade"})
-    public String criarAtividade(@RequestBody AtividadeDTO atividadeDTO) {
+    public ResponseEntity<HttpStatus> criarAtividade(@RequestBody AtividadeDTO atividadeDTO) {
         this.atividadeServices.saveAtividade(atividadeDTO);
 
-        return "redirect:/listagemEstudantes";
+        return ResponseEntity.ok().build();
     }
 }
